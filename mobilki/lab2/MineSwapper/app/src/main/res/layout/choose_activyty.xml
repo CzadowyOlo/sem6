@@ -1,0 +1,86 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wybierz rozmiar planszy:"
+        android:textSize="24sp" />
+
+    <RadioGroup
+        android:id="@+id/board_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="16dp">
+
+        <RadioButton
+            android:id="@+id/radio_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5x5" />
+
+        <RadioButton
+            android:id="@+id/radio_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7x7" />
+
+        <RadioButton
+            android:id="@+id/radio_9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9x9" />
+
+        <RadioButton
+            android:id="@+id/radio_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12x12" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/start_game_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rozpocznij grę" />
+
+    <TextView
+        android:id="@+id/liczba_min"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="liczba min: "
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <RadioGroup
+        android:id="@+id/trudnosc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioButton
+            android:id="@+id/malo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="malo" />
+
+        <RadioButton
+            android:id="@+id/srednio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="srednio" />
+
+        <RadioButton
+            android:id="@+id/duzo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="duzo" />
+    </RadioGroup>
+
+
+</LinearLayout>
