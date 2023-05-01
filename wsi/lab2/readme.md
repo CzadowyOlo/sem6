@@ -16,10 +16,12 @@ numerem gracza 1 (dla X) lub 2 (dla O),
 4. gracze na przemian wysyłają do serwera swoje ruchy, oznaczające wybrane pole we-
 dług poniższej tabeli:
 | 11 | 12 | 13 | 14 | 15 |
+|----|----|----|----|----|
 | 12 | 22 | 23 | 24 | 25 |
 | 31 | 32 | 33 | 34 | 35 |
 | 41 | 42 | 43 | 44 | 45 |
 | 51 | 52 | 53 | 54 | 55 |
+
 5. serwer po sprawdzeniu ruchu gracza przesyła go do przeciwnika (jeśli nie powoduje
 on końca gry) lub przesyła najpierw przeciwnikowi a następnie graczowi komunikat o
 końcu gry zgodnie z poniższymi regułami
