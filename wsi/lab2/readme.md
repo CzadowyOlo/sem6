@@ -13,8 +13,7 @@ czami),
 2. poczekanie przez klienta na komunikat z serwera 700, na który należy odpowiedzieć
 numerem gracza 1 (dla X) lub 2 (dla O),
 3. gracz 1 otrzymuje następnie komunikat 600, że może rozpocząć grę,
-4. gracze na przemian wysyłają do serwera swoje ruchy, oznaczające wybrane pole we-
-dług poniższej tabeli:
+4. gracze na przemian wysyłają do serwera swoje ruchy, oznaczające wybrane pole według poniższej tabeli:
 
 | 11 | 12 | 13 | 14 | 15 |
 
