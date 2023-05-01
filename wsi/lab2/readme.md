@@ -21,6 +21,12 @@ dług poniższej tabeli:
 | 31 | 32 | 33 | 34 | 35 |
 | 41 | 42 | 43 | 44 | 45 |
 | 51 | 52 | 53 | 54 | 55 |
+| Column 1 Heading | Column 2 Heading | Column 3 Heading |
+|------------------|------------------|------------------|
+| Row 1 Column 1   | Row 1 Column 2   | Row 1 Column 3   |
+| Row 2 Column 1   | Row 2 Column 2   | Row 2 Column 3   |
+| Row 3 Column 1   | Row 3 Column 2   | Row 3 Column 3   |
+
 
 5. serwer po sprawdzeniu ruchu gracza przesyła go do przeciwnika (jeśli nie powoduje
 on końca gry) lub przesyła najpierw przeciwnikowi a następnie graczowi komunikat o
