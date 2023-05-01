@@ -15,17 +15,17 @@ numerem gracza 1 (dla X) lub 2 (dla O),
 3. gracz 1 otrzymuje następnie komunikat 600, że może rozpocząć grę,
 4. gracze na przemian wysyłają do serwera swoje ruchy, oznaczające wybrane pole we-
 dług poniższej tabeli:
+
 | 11 | 12 | 13 | 14 | 15 |
-|----|----|----|----|----|
+
 | 12 | 22 | 23 | 24 | 25 |
+
 | 31 | 32 | 33 | 34 | 35 |
+
 | 41 | 42 | 43 | 44 | 45 |
+
 | 51 | 52 | 53 | 54 | 55 |
-| Column 1 Heading | Column 2 Heading | Column 3 Heading |
-|------------------|------------------|------------------|
-| Row 1 Column 1   | Row 1 Column 2   | Row 1 Column 3   |
-| Row 2 Column 1   | Row 2 Column 2   | Row 2 Column 3   |
-| Row 3 Column 1   | Row 3 Column 2   | Row 3 Column 3   |
+
 
 
 5. serwer po sprawdzeniu ruchu gracza przesyła go do przeciwnika (jeśli nie powoduje
