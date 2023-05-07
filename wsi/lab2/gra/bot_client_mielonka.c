@@ -471,8 +471,7 @@ void por(int dupa, int numer){
     
 }
 
-void licz_heury_punkty()
-{
+void licz_heury_punkty(){
  
     for(int i = 0; i<5;i++){
         if( ( masks[2*i] == 65 && masks[(2*i)+1] == 5) || ( masks[2*i] == 80 && masks[(2*i)+1] == 65) ){
@@ -786,37 +785,19 @@ int max(int a, int b){
         return b;
     }
 }
-
-void minimax(int board[5][5], int depth, bool isMax, int gracz )
+/**
+void minimax(int board[5][5], int depth, bool isMax, int gracz, int move)
 {
     MTRand r = seedRand(1337);
     double f;
-    int score;
     int curr;
-    //printf("current depth: %d\n", depth);
 
-    // // If Maximizer has won the game return his/her
-    // // evaluated score
-    // if (score == 10)
-    //     return score;
-  
-    // // If Minimizer has won the game return his/her
-    // // evaluated score
-    // if (score == -10)
-    //     return score;
-  
-    // If there are no more moves and no winner then
-    // it is a tie
-    // if (isMovesLeft(board)==false)
-    //     return 0;
-  
-    // If this maximizer's move
     if(depth == 0){
         return;
     }
     if (isMax)
     {
-        int best = INT_MIN;
+        best = INT_MIN;
   
         // Traverse all cells
         for (int i = 0; i<5; i++)
@@ -828,27 +809,25 @@ void minimax(int board[5][5], int depth, bool isMax, int gracz )
                 {
                     // Make the move
                     board[i][j] = gracz;
-                    //score = evaluate(gracz);
-                    // Call minimax recursively and choose
-                    // the maximum value
-                    score = evaluate(gracz); //wynik planszy
-                    best = max( best, score );
-                    //printf("current score: %d and depth: %d and maxdepth: %d and best is: %d\n", score, depth, maxdepth, best);
-
-                    if(depth == maxdepth && score > best){
-                        //printf("dup\n");
-                        final_move = 10*(i+1) + j+1;
+                    if(depth == maxdepth){
+                        move = 10*(i+1) + j+1;
                     }
-                    if(depth == maxdepth && score == best){
-                        f = genRand(&r);
-                        if(f > 0.51){
-                            final_move = 10*(i+1) + j+1;
+                    minimax(board, depth-1, !isMax, gracz, move);
+
+                    
+                        score = evaluate(gracz); //wynik planszy
+                        if(score > best){
+                            final_move = move;
                         }
-                    }
+                        if(score == best){
+                            f = genRand(&r);
+                            if(f > 0.51){
+                                final_move = move;
+                            }
+                        }
+                        best = max( best, score );
 
-                    minimax(board, depth-1, !isMax, gracz);
-
-
+                    
                     // Undo the move
                     board[i][j] = 0;
                 }
@@ -860,26 +839,36 @@ void minimax(int board[5][5], int depth, bool isMax, int gracz )
     // If this minimizer's move
     else
     {
-        int best = INT_MAX;
+        best = INT_MAX;
   
         // Traverse all cells
-        for (int i = 0; i<3; i++)
+        for (int i = 0; i<5; i++)
         {
-            for (int j = 0; j<3; j++)
+            for (int j = 0; j<5; j++)
             {
                 // Check if cell is empty
                 if (board[i][j]== 0)
                 {
                     // Make the move
                     board[i][j] = 3 - gracz;
-  
-                    // Call minimax recursively and choose
-                    // the minimum value
-                    score = evaluate(gracz);
-                    best = min(best, score);
-                    
-                    minimax(board, depth-1, !isMax, gracz);
-  
+
+                    minimax(board, depth-1, !isMax, gracz, move);
+
+                    if(depth == 1){
+                        score = evaluate(gracz); //wynik planszy
+                        if(score < best){
+                            final_move = move;
+                        }
+                        if(score == best){
+                            f = genRand(&r);
+                            if(f > 0.51){
+                                final_move = move;
+                            }
+                        }
+                        best = min( best, score );
+
+                    }
+
                     // Undo the move
                     board[i][j] = 0;
                 }
@@ -889,7 +878,140 @@ void minimax(int board[5][5], int depth, bool isMax, int gracz )
     }
     //return 0;
 }
+*/
 
+// This is the minimax function. It considers all
+// the possible ways the game can go and returns
+// the value of the board
+int minimax(int depth, bool isMax, int player)
+{
+    int score = evaluate(player);
+    int best;
+    if(depth == 0 || (heury[5][player] > 0 && heury[6][player] == 0) || (heury[5][3-player] > 0 && heury[6][3-player] == 0) || 
+    (heury[6][player] > 0) || (heury[6][3 - player] > 0) || (heury[7][3 - player] == 0) || (heury[7][player] == 0)){
+        return score;
+    }
+   
+    // // If Maximizer has won the game return his/her
+    // // evaluated score
+    // if (score == 10)
+    //     return score;
+  
+    // // If Minimizer has won the game return his/her
+    // // evaluated score
+    // if (score == -10)
+    //     return score;
+  
+    // // If there are no more moves and no winner then
+    // // it is a tie
+    // if (isMovesLeft(board)==false)
+    //     return 0;
+  
+    // If this maximizer's move
+    if (isMax)
+    {
+        best = INT_MIN;
+  
+        // Traverse all cells
+        for (int i = 0; i<5; i++)
+        {
+            for (int j = 0; j<5; j++)
+            {
+                // Check if cell is empty
+                if (board[i][j]== 0)
+                {
+                    // Make the move
+                    board[i][j] = player;
+  
+                    // Call minimax recursively and choose
+                    // the maximum value
+
+                    best = max( best,
+                        minimax(depth-1, false, player) );
+  
+                    // Undo the move
+                    board[i][j] = 0;
+                }
+            }
+        }
+        return best;
+    }
+  
+    // If this minimizer's move
+    else
+    {
+        best = INT_MAX;
+  
+        // Traverse all cells
+        for (int i = 0; i<5; i++)
+        {
+            for (int j = 0; j<5; j++)
+            {
+                // Check if cell is empty
+                if (board[i][j]== 0)
+                {
+                    // Make the move
+                    board[i][j] = 3 - player;
+  
+                    // Call minimax recursively and choose
+                    // the minimum value
+                    best = min(best,
+                           minimax(depth-1, true, player));
+  
+                    // Undo the move
+                    board[i][j] = 0;
+                }
+            }
+        }
+        return best;
+    }
+}
+  
+// This will return the best possible move for the player
+int findBestMove(int player, int maxdepth)
+{
+    int bestVal = INT_MIN;
+    int bestMove = 0;
+    // bestMove.row = -1;
+    // bestMove.col = -1;
+  
+    // Traverse all cells, evaluate minimax function for
+    // all empty cells. And return the cell with optimal
+    // value.
+    for (int i = 0; i<5; i++)
+    {
+        for (int j = 0; j<5; j++)
+        {
+            // Check if cell is empty
+            if (board[i][j]==0)
+            {
+                // Make the move
+                board[i][j] = player;
+  
+                // compute evaluation function for this
+                // move.
+                int moveVal = minimax(maxdepth-1, false, player);
+  
+                // Undo the move
+                board[i][j] = 0;
+  
+                // If the value of the current move is
+                // more than the best value, then update
+                // best/
+                if (moveVal > bestVal)
+                {
+                    bestMove = 10*(i+1) + j + 1;
+                    bestVal = moveVal;
+                }
+            }
+        }
+    }
+  
+    // printf("The value of the best Move is : %d\n\n",
+    //         bestVal);
+  
+    return bestMove;
+}
 
 int main(int argc, char *argv[])
 {
@@ -982,8 +1104,8 @@ int main(int argc, char *argv[])
     //     printf("Error while reading move\n");
     //     return -1;
     //   };
-      minimax(board, maxdepth, true, player);
-      move = final_move;
+      //minimax(board, maxdepth, true, player, INT_MIN, INT_MIN, 0);
+      move = findBestMove(player, maxdepth);
       setMove(move, player);
       //printBoard();
       memset(client_message, '\0', sizeof(client_message));
