@@ -16,7 +16,8 @@ Wywołanie serwera:
 
 Wywołanie klienta:
 
-./game_client <numer ip> <numer portu> <gracz> <poziom głębokości minmaksa>
+./game_client <numer ip> <numer portu> <gracz> //gracz żywy
+./bot_client <numer ip> <numer portu> <gracz> <poziom głębokości minmaksa> //bot w miare ok
 
 gracz: 1 dla X lub 2 dla O.
 
